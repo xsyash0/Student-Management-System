@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" crossorigin="anonymous">
+    <style>
+        /* Custom styles */
+        body {
+            background-color: #5A5858; /* Updated background color */
+            color: white; /* Text color for better contrast */
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold; /* Make the title bold */
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+        .navbar .nav-left, .navbar .nav-right {
+            font-weight: bold; /* Make navbar links bold */
+        }
+        .navbar a {
+            color: white; /* Navbar link color */
+        }
+        .navbar a:hover {
+            color: #ccc; /* Change color on hover */
+        }
+        .container {
+            margin-top: 40px;
+        }
+        /* Table Styling */
+        table {
+            background-color: #f8f9fa; /* Whitish-grey background */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        table th, table td {
+            text-align: center;
+            color: black; /* Change text color for table cells */
+        }
+        table td {
+            font-weight: normal; /* Default weight for other table cells */
+        }
+        table td.student-name {
+            font-weight: bold; /* Bold for student names */
+        }
+        table tr:hover {
+            background-color: #e2e6ea; /* Slightly darker grey on hover */
+        }
+        .btn-primary {
+            background-color: #007bff; /* Bootstrap primary color */
+        }
+        .btn-danger {
+            background-color: #dc3545; /* Bootstrap danger color */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Centered Title -->
+<h1>Student Management System</h1>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-dark bg-dark">
+    <div class="nav-left">
+        <a th:href="@{/}" class="navbar-brand">HOME</a>
+    </div>
+    <div class="nav-right">
+        <a th:href="@{/addStudent}" class="navbar-brand">ADD STUDENT</a>
+    </div>
+</nav>
+
+<!-- Table Container -->
+<div class="container">
+    <table class="table table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>Student First Name</th>
+            <th>Student Last Name</th>
+            <th>Student Email</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student : ${listStudents}">
+            <td th:text="${student.firstName}" class="student-name"></td> <!-- Bold for first name -->
+            <td th:text="${student.lastName}" class="student-name"></td> <!-- Bold for last name -->
+            <td th:text="${student.email}"></td>
+            <td>
+                <!-- Edit Button -->
+                <a th:href="@{/updateStudent/{id}(id=${student.id})}" class="btn btn-primary btn-sm">EDIT</a>
+                <!-- Delete Button -->
+                <a th:href="@{/deleteStudent/{id}(id=${student.id})}" class="btn btn-danger btn-sm">DELETE</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+</body>
+</html>
